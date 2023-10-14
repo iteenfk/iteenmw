@@ -3,91 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ホームページの練習２</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>クリックイベント</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .dsp_c{
+            border: 1px solid red;
+            text-align: center;
+            width: 400px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 20px;
+            background-color: pink;
+        }
+
+        #dsp_id{
+            color: red;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        h1{
+            text-align: center;
+            font-size: 20px;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        header
-        <h1>写真のホームページ</h1>
-        <nav>
-            <ul>
-                <li>ナビ１</li>
-                <li>ナビ２</li>
-                <li>ナビ３</li>
-                <li>ナビ４</li>
-                <li>ナビ５</li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        main
-        <div class="main">
-            <div class="x">
-                <p>A区分</p>
-                <div class="y">
-                    <p>写真0</p>
-                    <img src="img/pic0.png" alt="0" width="200">
-                </div>
-                <div class="y">
-                    <div>
-                        <p>写真1</p>
-                        <img src="img/pic1.png" alt="1" width="100">
-                    </div>
-                    <div>
-                        <p>写真2</p>
-                        <img src="img/pic2.png" alt="2" width="80">
-                    </div>
-                </div>
-            
-            </div>
+    <h1>JavaScript練習アプリ</h1>
+    <div class="dsp_c">
+        入力：<input type="text" id="in_id">
+        <p id="dsp_id">おはようございます。</p>
+        <button onclick="btn()">クリック</button>
+    </div>
 
-            <div class="x">
-                <p>区分B</p>
-                <div class="y">
-                    <div>
-                        <p>写真1</p>
-                        <img src="img/pic1.png" alt="1" width="100">
-                    </div>
-                    <div>
-                        <p>写真2</p>
-                        <img src="img/pic2.png" alt="2" width="100">
-                    </div>
-                </div>
-                <div class="y">
-                    <div>
-                        <p>写真2</p>
-                        <img src="img/pic2.png" alt="2" width="100">
-                    </div>
-                    <div>
-                        <p>写真0</p>
-                        <img src="img/pic0.png" alt="0" width="100">
-                    </div>
-                </div>
-            </div>
+    <script>
+        function btn(){
+            const dsp = document.getElementById("dsp_id");
+            const input = document.getElementById("in_id").value;
+            dsp.textContent = input;
+            document.getElementById("in_id").value = "";
+        }
 
-            <div class="x">
-                <p>区分C</p>
-                <div class="y">
-                    <p>写真2</p>
-                    <img src="img/pic2.png" alt="2" width="100">
-                </div>
-                <div class="y">
-                    <p>写真0</p>
-                    <img src="img/pic0.png" alt="0" width="100">
-                </div>
-                <div class="y">
-                    <p>写真1</p>
-                    <img src="img/pic1.png" alt="1" width="100">
-                </div>
-
-            </div>
-        </div>
-    </main>
-    <footer>
-        footer
-        <p>2023年8月　iTeen 福岡春日校</p>
-    </footer>
-    
+    </script>
 </body>
 </html>
