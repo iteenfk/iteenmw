@@ -1,51 +1,50 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>クリックイベント</title>
+    <title>リストに要素を追加するアプリ</title>
     <style>
         *{
             padding: 0;
             margin: 0;
         }
         .dsp_c{
-            border: 1px solid red;
             text-align: center;
-            width: 400px;
-            margin: auto;
-            padding: 20px;
-            border-radius: 20px;
-            background-color: pink;
-        }
-
-        #dsp_id{
-            color: red;
-            font-size: 20px;
-            font-weight: bold;
-        }
-        h1{
-            text-align: center;
-            font-size: 20px;
         }
     </style>
 </head>
 <body>
-    <h1>JavaScript練習アプリ</h1>
     <div class="dsp_c">
-        入力：<input type="text" id="in_id">
-        <p id="dsp_id">おはようございます。</p>
-        <button onclick="btn()">クリック</button>
+
+        <h1>リストに要素を追加するアプリ</h1>
+        <input type="text" id="in_id">
+        <button onclick="btn()">追加</button>
+        <button onclick="p()">印刷</button>
+        <ul>
+    
+        </ul>
     </div>
 
     <script>
+        "use strict";
+
         function btn(){
-            const dsp = document.getElementById("dsp_id");
+
             const input = document.getElementById("in_id").value;
-            dsp.textContent = input;
-            document.getElementById("in_id").value = "";
+            if (input != ""){
+                const li = document.createElement("li");
+                li.textContent = document.getElementById("in_id").value;
+                const ul = document.querySelector("ul");
+                ul.appendChild(li);
+    
+                document.getElementById("in_id").value = "";
+            }
         }
 
+        function p(){
+            window.print();
+        }
     </script>
 </body>
 </html>
