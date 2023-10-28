@@ -1,49 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>リストに要素を追加するアプリ</title>
-    <style>
-        *{
-            padding: 0;
-            margin: 0;
-        }
-        .dsp_c{
-            text-align: center;
-        }
-    </style>
+    <title>おみくじゲーム</title>
 </head>
 <body>
-    <div class="dsp_c">
-
-        <h1>リストに要素を追加するアプリ</h1>
-        <input type="text" id="in_id">
-        <button onclick="btn()">追加</button>
-        <button onclick="p()">印刷</button>
-        <ul>
-    
-        </ul>
-    </div>
-
+    <h1>おみくじゲーム</h1>
+    <button onclick="btn()">おみくじを引く</button>//btn()
+    <div id="output_id"></div>
     <script>
-        "use strict";
-
         function btn(){
 
-            const input = document.getElementById("in_id").value;
-            if (input != ""){
-                const li = document.createElement("li");
-                li.textContent = document.getElementById("in_id").value;
-                const ul = document.querySelector("ul");
-                ul.appendChild(li);
+            const output =document.getElementById("output_id");
     
-                document.getElementById("in_id").value = "";
-            }
-        }
-
-        function p(){
-            window.print();
+            
+            const omikuji =["大吉","中吉","小吉","吉","凶","大凶"];
+            const i = Math.floor(Math.random() * omikuji.length);
+            const result = omikuji[i];
+            output.textContent = "おみくじの結果"+ ":"+ result;
         }
     </script>
 </body>
