@@ -3,23 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>おみくじゲーム</title>
+    <title>掛け算九九</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>おみくじゲーム</h1>
-    <button onclick="btn()">おみくじを引く</button>//btn()
-    <div id="output_id"></div>
-    <script>
-        function btn(){
+    <h1>掛け算九九アプリ</h1>
+    <div class="output_c">
+        <!-- <div id="output_id"></div> -->
+        <input type="text" id="input_id">の段
+        <ul id="output_id"></ul>
+        <button onclick="btn()">作成</button>
+    </div>
 
-            const output =document.getElementById("output_id");
-    
-            
-            const omikuji =["大吉","中吉","小吉","吉","凶","大凶"];
-            const i = Math.floor(Math.random() * omikuji.length);
-            const result = omikuji[i];
-            output.textContent = "おみくじの結果"+ ":"+ result;
-        }
-    </script>
+    <script src="js/main.js"></script>
 </body>
 </html>
