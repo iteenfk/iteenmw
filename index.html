@@ -1,20 +1,65 @@
-<!DOCTYPE html>
-<html lang="ja">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>掛け算九九</title>
-    <link rel="stylesheet" href="css/style.css">
+  <title>ラジオボタンアプリ</title>
+  <style>
+    body {
+      text-align: center;
+      padding: 20px;
+    }
+  </style>
 </head>
 <body>
-    <h1>掛け算九九アプリ</h1>
-    <div class="output_c">
-        <!-- <div id="output_id"></div> -->
-        <input type="text" id="input_id">の段
-        <ul id="output_id"></ul>
-        <button onclick="btn()">作成</button>
-    </div>
 
-    <script src="js/main.js"></script>
+  <h1>好きな言語を選んでください</h1>
+
+  <input type="radio" name="language" value="JavaScript">JavaScript
+
+  <input type="radio" name="language" value="Python">Python
+
+  <input type="radio" name="language" value="Scratch">Scratch
+  
+  <br><button onclick="btn()">クリック</button>
+
+  <div id="output_id"></div>
+  <div id="img_id"></div>
+
+  <script>
+    
+    function btn(){
+       const output = document.getElementById("output_id");
+       const languages = document.getElementsByName("language");
+       const img = document.getElementById("img_id");
+
+       for (let i = 0; i <= 2; i++){
+       if (languages[i].checked == true){
+            const language = languages[i].value;
+            // output.textContent = `好きな言語は${language}です。`;
+            output.textContent = "好きな言語は"+language+"です。";
+            
+            addImage(language, img)
+           }
+         
+        }
+      }
+
+     function addImage(language, img){
+        let src = "";
+        if (language == "JavaScript"){
+           src = "javascript.png";
+        } 
+        if (language == "Python"){
+           src = "python.png";
+        }
+        if (language == "Scratch"){
+           src = "scratch.jpg";
+        }
+
+        const image = document.createElement("img");
+        image.src = src;
+        image.width = 300;
+        img.innerHTML = "";
+        img.appendChild(image);
+}
+  </script>
 </body>
 </html>
