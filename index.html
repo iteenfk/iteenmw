@@ -1,65 +1,76 @@
-<html>
+<!DOCTYPE html>
+<html lang="ja">
 <head>
-  <title>ラジオボタンアプリ</title>
-  <style>
-    body {
-      text-align: center;
-      padding: 20px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11-23QRコード</title>
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .input_c{
+            text-align: center;
+            border: 1px solid red;
+            width: 400px;
+            margin: auto;
+            padding: 10px;
+            border-radius: 10px;
+        }
+        #output_id{
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        #size,#fore,#back{
+            width: 80px;
+        }
+        button{
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
+    <div class="input_c">
+        <h1>QRCode作成</h1>
+        url: <input type="text" id="url_id" value="https://google.co.jp"> <br>
+        サイズ: <select name="" id="size_id">
+                    <option value="100">100x100</option>
+                    <option value="200">200x200</option>
+                    <option value="300">300x300</option>
+                </select><br>
+        前景色: <input type="text" id="fore_id"> <br>
+        背景色: <input type="text" id="back_id"> <br>
+        <button onclick="btn()">作成</button>
+    </div>
+    <div id="output_id"></div>
 
-  <h1>好きな言語を選んでください</h1>
+    <script>
+        "use strict";
+        function btn(){
+            const output = document.getElementById("output_id");
+            const url = document.getElementById("url_id").value;
+            const size = document.getElementById("size_id").value;
+            const fore = document.getElementById("fore_id").value;
+            const back = document.getElementById("back_id").value;
 
-  <input type="radio" name="language" value="JavaScript">JavaScript
-
-  <input type="radio" name="language" value="Python">Python
-
-  <input type="radio" name="language" value="Scratch">Scratch
-  
-  <br><button onclick="btn()">クリック</button>
-
-  <div id="output_id"></div>
-  <div id="img_id"></div>
-
-  <script>
+            if (url != "" && size != "" && fore != "" && back != ""){
+                const option = {
+                    text:url,
+                    width:size,
+                    height:size,
+                    colorDark:fore,
+                    colorLight:back
+                }
     
-    function btn(){
-       const output = document.getElementById("output_id");
-       const languages = document.getElementsByName("language");
-       const img = document.getElementById("img_id");
-
-       for (let i = 0; i <= 2; i++){
-       if (languages[i].checked == true){
-            const language = languages[i].value;
-            // output.textContent = `好きな言語は${language}です。`;
-            output.textContent = "好きな言語は"+language+"です。";
-            
-            addImage(language, img)
-           }
-         
+                new QRCode(output,option)
+                document.getElementById("url_id").value = "";
+                document.getElementById("size_id").value = "";
+                document.getElementById("fore_id").value = "";
+                document.getElementById("back_id").value = "";
+            }
         }
-      }
-
-     function addImage(language, img){
-        let src = "";
-        if (language == "JavaScript"){
-           src = "javascript.png";
-        } 
-        if (language == "Python"){
-           src = "python.png";
-        }
-        if (language == "Scratch"){
-           src = "scratch.jpg";
-        }
-
-        const image = document.createElement("img");
-        image.src = src;
-        image.width = 300;
-        img.innerHTML = "";
-        img.appendChild(image);
-}
-  </script>
+    </script>
 </body>
 </html>
