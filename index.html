@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>11-25音楽player</title>
+    <title>12-3時刻アプリ</title>
     <style>
         *{
             padding: 0;
@@ -11,56 +11,69 @@
         }
         body{
             text-align: center;
-            background-color: pink;
         }
-        h1{
-            font-size: 20px;
+        input{
+            width: 50px;
         }
-        .player_c{
-            border: 1px solid red;
-            width: 400px;
-            margin: auto;
-            border-radius: 10px;
-            padding: 10px;
-            background-color: antiquewhite;
+        #output_id{
+            font-size: 30px;
+            font-weight: bold;
+            color:red;
         }
     </style>
 </head>
 <body>
-    <div class="player_c">
-        <h1>iTeen 音楽player</h1>
-    
-        <audio src="test.mp3" id="audio_id"></audio>
-        <br>
-        <button onclick="play()">再生</button>
-        <button onclick="pause()">一時停止</button>
-        <button onclick="stop()">停止</button>
-        <br><br>
-        <input type="range" min="0" max="100" id="input_id" oninput="volume()">
-        <div id="output_id">50%</div>
-    </div>
+    <h1>現在時刻</h1>
+    <audio src="alert.mp3" id="alert_id"></audio>
+    アラーム<br>
+    時間: <input type="text" id="h_id"><br>
+    分   : <input type="text" id="m_id"><br>
+    秒   : <input type="text" id="s_id"><br>
+    <div id="output_id">表示</div>
+    <button onclick="start()">開始</button>
+    <button onclick="stop()">停止</button>
+    <button onclick="cl()">クリア</button>
 
     <script>
         "use strict";
-        const audio = document.getElementById("audio_id");
-        const input = document.getElementById("input_id");
-        const output = document.getElementById("output_id");
-
-        function volume(){
-            const volume = input.value;
-            // output.textContent = volume + "％";
-            output.textContent = `${volume}％`;
-            audio.volume = volume/100;
-        }
-        function play(){
-            audio.play();
-        }
-        function pause(){
-            audio.pause();
+        let t = null;
+        function start(){
+            clearInterval(t);
+            t = setInterval(btn,1000);
         }
         function stop(){
-            audio.pause();
-            audio.currentTime = 0;
+            clearInterval(t);
+        }
+        function cl(){
+            location.reload();
+        }
+        function btn(){
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = now.getMonth()+1;
+            const date = now.getDate();
+            let day = now.getDay();
+            if (day == 0){day = "日";}
+            if (day == 1){day = "月";}
+            if (day == 2){day = "火";}
+            if (day == 3){day = "水";}
+            if (day == 4){day = "木";}
+            if (day == 5){day = "金";}
+            if (day == 6){day = "土";}
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const seconds = now.getSeconds();
+
+            const output = document.getElementById("output_id");
+            output.textContent = `${year}年${month}月${date}日(${day})${hours}時${minutes}分${seconds}秒`;
+
+            const h = document.getElementById("h_id").value;
+            const m = document.getElementById("m_id").value;
+            const s = document.getElementById("s_id").value;
+            const alert = document.getElementById("alert_id");
+            if (hours == h && minutes == m && seconds == s){
+                alert.play();
+            }
         }
     </script>
 </body>
