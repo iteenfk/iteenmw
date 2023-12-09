@@ -3,78 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>12-3時刻アプリ</title>
+    <title>12-8クイズ</title>
     <style>
-        *{
-            padding: 0;
-            margin: 0;
-        }
         body{
             text-align: center;
         }
-        input{
-            width: 50px;
+        #option_id{
+            display: flex;
+            justify-content: center;
         }
-        #output_id{
-            font-size: 30px;
-            font-weight: bold;
-            color:red;
+        .option_c{
+            margin: 10px;
         }
     </style>
 </head>
 <body>
-    <h1>現在時刻</h1>
-    <audio src="alert.mp3" id="alert_id"></audio>
-    アラーム<br>
-    時間: <input type="text" id="h_id"><br>
-    分   : <input type="text" id="m_id"><br>
-    秒   : <input type="text" id="s_id"><br>
-    <div id="output_id">表示</div>
-    <button onclick="start()">開始</button>
-    <button onclick="stop()">停止</button>
-    <button onclick="cl()">クリア</button>
+    <h1>クイズアプリ</h1>
+    <div id="question_id"></div>
+    <div id="option_id"></div>
+    <button onclick="next()">次の問題</button>
+    <div id="score_id"></div>
 
     <script>
         "use strict";
-        let t = null;
-        function start(){
-            clearInterval(t);
-            t = setInterval(btn,1000);
-        }
-        function stop(){
-            clearInterval(t);
-        }
-        function cl(){
-            location.reload();
-        }
-        function btn(){
-            const now = new Date();
-            const year = now.getFullYear();
-            const month = now.getMonth()+1;
-            const date = now.getDate();
-            let day = now.getDay();
-            if (day == 0){day = "日";}
-            if (day == 1){day = "月";}
-            if (day == 2){day = "火";}
-            if (day == 3){day = "水";}
-            if (day == 4){day = "木";}
-            if (day == 5){day = "金";}
-            if (day == 6){day = "土";}
-            const hours = now.getHours();
-            const minutes = now.getMinutes();
-            const seconds = now.getSeconds();
+        const questions = [
+            {
+                question:"フランスの首都は？",
+                options:["ベルリン","マドリード","パリ","ローマ"],
+                answer:"パリ",
+            },
+            {
+                question:"赤い惑星とは？",
+                options:["火星","木星","地球","土星"],
+                answer:"火星",
 
-            const output = document.getElementById("output_id");
-            output.textContent = `${year}年${month}月${date}日(${day})${hours}時${minutes}分${seconds}秒`;
+            },  
+            {
+                question:"最大の哺乳類は？",
+                options:["ゾウ","シロナガスクジラ","サイ","カバ"],
+                answer:"シロナガスクジラ",
 
-            const h = document.getElementById("h_id").value;
-            const m = document.getElementById("m_id").value;
-            const s = document.getElementById("s_id").value;
-            const alert = document.getElementById("alert_id");
-            if (hours == h && minutes == m && seconds == s){
-                alert.play();
+            },
+        ];
+
+        console.log(questions);
+
+        let i = 0;
+        let score = 0;
+
+        function dsp(){
+            const question_out = document.getElementById("question_id");
+            question_out.textContent = questions[i].question;
+
+            const option_out = document.getElementById("option_id");
+            option_out.textContent = "";
+            
+            for (let j = 0; j < 4; j++){
+                const div = document.createElement("div");
+                div.textContent = questions[i].options[j];
+                div.classList.add("option_c");
+                div.onclick = function click(){
+                    check(questions[i].options[j]);
+                };
+                option_out.appendChild(div);
             }
         }
+        function check(option){
+            if (option == questions[i].answer){
+                score++;
+            }
+            const score_out = document.getElementById("score_id");
+            score_out.textContent = `Score:${score}`;
+        }
+        function next(){
+            i++;
+            const score_out = document.getElementById("score_id");
+            score_out.textContent = "";
+            if (i < questions.length){
+                dsp()
+            }else{
+                const score_out = document.getElementById("score_id");
+                score_out.textContent = "クイズ終了";
+                const option_out = document.getElementById("option_id");
+                option_out.textContent = "";
+            }
+        }
+        dsp();
     </script>
 </body>
 </html>
